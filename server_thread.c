@@ -84,7 +84,6 @@ int main(int argc, char *argv[])
 {
     // Initialize variables
     if (1 == argc) return 0;
-    printf("%s\n", argv[1]);
     int port;
     char buf[4096], ip[16];
     char *ptr = strtok(argv[1], ":");
@@ -92,7 +91,6 @@ int main(int argc, char *argv[])
     strcpy(ip, ptr);
     ptr = strtok(NULL, ":");
     port = atoi(ptr);
-    printf("%s  %d\n", ip, port);
     if(0 == strcmp(ip, "-1") || 0 == port)
     {
         printf("Check the IP, PORT\n");

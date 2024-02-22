@@ -10,10 +10,11 @@
  
 // For threading, link with lpthread
 #include <pthread.h>
- 
+int port;
+char buf[4096], ip[16];
 // Function to send data to
 // server socket.
-int timeout_recv(int fd, int *buf, int len,  int nsec)
+int timeout_recv(int fd, int *buf, int len, int nsec)
 {
     struct timeval timeout;
     timeout.tv_sec = nsec;
@@ -33,8 +34,8 @@ int timeout_recv(int fd, int *buf, int len,  int nsec)
 
 void* clienthread(void* args)
 {
-    int status = 0, port = 8989;
-    char buf[4096], ip[16] = "127.0.0.1";
+    int status = 0;
+    char buf[4096];
     // Create a stream socket
     int client_request = *((int*)args);
     int network_socket;
@@ -109,15 +110,12 @@ int main(int argc, char *argv[])
 {
     // Initialize variables
     if (1 == argc) return 0;
-    printf("%s\n", argv[1]);
-    int port;
-    char buf[4096], ip[16];
+    char buf[4096];
     char *ptr = strtok(argv[1], ":");
     if (ptr == NULL) return 0;
     strcpy(ip, ptr);
     ptr = strtok(NULL, ":");
     port = atoi(ptr);
-    printf("%s  %d\n", ip, port);
     pthread_t tid;
     int client_request = 1;
  
