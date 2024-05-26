@@ -21,10 +21,7 @@ TCP 建立連線時會有三次握手
 斷開連線有四次揮手。
 
 ## 2. Socket
-第一步要先建立 socket，linux 中使用下方函數來建立。
-```int socket(int domain, int type, int protocol);
-```
-成功產生socket時，會返回該 socket 的檔案描述符 (socket file descriptor)，我們可以透過它來操作 socket。失敗則會回傳-1(INVALID_SOCKET)。
+第一步要先建立 socket，linux 中使用```int socket(int domain, int type, int protocol);```來建立。成功產生socket時，會返回該 socket 的檔案描述符 (socket file descriptor)，我們可以透過它來操作 socket。失敗則會回傳-1(INVALID_SOCKET)。
 
 #### 1. domain
 AF_UNIX/AF_LOCAL：讓兩個程式共享一個檔案系統(file system)
@@ -42,10 +39,10 @@ SOCK_DGRAM：UDP protocol提供的是一個一個的資料包(datagram)。
 ```int bind(int sockfd, struct sockaddr* addr, int addrlen);```
 
 ## 4. listen
-socket 綁定成功後就可以使用 ```int listen(int sockfd, int backlog);```監聽，backlog 表示最多能有幾個人能連入server。成功為0，產生錯誤則回傳-1
+socket 綁定成功後就可以使用 ```int listen(int sockfd, int backlog);```監聽，backlog 表示最多能有幾個人能連入 server。成功為 0，產生錯誤則回傳 -1。此函數就是在監聽，看是否有 client 發送握手訊，即第一次握手。
 
 ## 5. accept
-接著進入無窮迴圈中等待連線進入，當有新的連線進入後使用 ```int accept(int sockfd, struct sockaddr addr, socklen_t addrlen);```來接收新的連線。將前面所建立的 socket 傳入，並將結構體和結構體大小傳入，就可以開始與 client 端收發訊息。
+接著進入無窮迴圈中等待連線進入，當有新的連線進入後使用 ```int accept(int sockfd, struct sockaddr addr, socklen_t addrlen);```來接收新的連線。將前面所建立的 socket 傳入，並將結構體和結構體大小傳入，就可以開始與 client 端收發訊息。及第二次握手。
 
 ## 6. connect
-就是 client 端的 bind，要綁對方的 ip:port。```int connect(int sockfd, struct sockaddr *server, int addr_len);```
+就是 client 端的 bind，要綁對方的 ip:port。```int connect(int sockfd, struct sockaddr *server, int addr_len);```。client 端藉由 connect 發送握手訊息給 server。
