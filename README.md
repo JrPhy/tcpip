@@ -4,6 +4,7 @@ in another terminal ./client_thread ip:port
 
 ## 1. 流程
 | server |  | client | 
+| :---: | :---: | :---: | 
 | socekt() |  | socekt()  | 
 | bind() |  |  | 
 | listen() |  |  |
