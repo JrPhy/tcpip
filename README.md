@@ -32,7 +32,7 @@ SOCK_STREAM：TCP protocol，提供一個序列化的連接導向位元流，可
 SOCK_DGRAM：UDP protocol提供的是一個一個的資料包(datagram)。
 
 #### 3. protocol
-設定socket的協定標準，一般來說都會設為0，讓kernel選擇type對應的默認協議。
+設定 socket 的協定標準，0 是讓 kernel 選擇 type 對應的默認協議。
 
 ## 3. bind
 再來要指定 ip(字串) 與 port(整數)，```iner_addr(ip string)```將 ipv4 的字串轉為整數，```htons(port)```將本機端的字節序(endian)轉換成了網路端的字節序，最後傳入下方來綁定 ip:port。
