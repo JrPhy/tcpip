@@ -72,7 +72,7 @@ void* reader(void* args)
         sem_post(&y);
     }
  
-    // Unlock the semaphore
+    // UnLock the semaphore
     sem_post(&x);
  
     printf("\n%d reader is inside\n", readercount);
