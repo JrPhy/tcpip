@@ -8,7 +8,6 @@ set_target_properties(server_thread client_thread PROPERTIES
 )
 include_directories(${PROJECT_NAME})
 link_directories(${PROJECT_NAME})
-message(CMAKE_CURRENT_SOURCE_DIR)
 install(TARGETS server_thread client_thread add divide
     RUNTIME DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../build/install/bin
     LIBRARY DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../build/install/lib
